@@ -60,7 +60,7 @@ Dentro de esa carpeta subirás todas tus actividades.
 
 ⚠️ IMPORTANTE: Solo debes hacer add a tu carpeta.
 
-    git add lecciones/tu-nombre-apellido/
+    git add alumnos/tu-nombre-apellido/
 
 NO usar:
 
