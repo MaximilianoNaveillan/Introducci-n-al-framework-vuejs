@@ -5,7 +5,7 @@
     <title>Contador con Vue CDN</title>
   </head>
   <body>
-    <div id="app">
+    <div id="root">
       <h1>Contador: {{ contador }}</h1>
       <button @click="incrementar">➕ Incrementar</button>
       <button @click="decrementar">➖ Decrementar</button>
@@ -30,7 +30,7 @@
             this.contador--;
           },
         },
-      }).mount('#app');
+      }).mount('#root'); //document.getelementById(#app)
     </script>
   </body>
 </html>
