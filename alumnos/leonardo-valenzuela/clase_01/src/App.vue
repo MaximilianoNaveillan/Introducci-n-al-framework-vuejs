@@ -1,30 +1,41 @@
 <script setup>
 import { ref } from "vue";
-const saludar = ref("hola Leo");
-const contador = ref(0);
-const incrementar = () => {
-  contador.value++;
-};
 
-const tareas = ref([
-  "aprender vue",
-  "aprender react",
-  "aprender angular",
-  "aprender node",
-])
+//referencias de reactividad
+const message = ref("");
+const tareas = ref([]);
 
+//crear tarea
+const crearTarea = () => {
+  console.log(message.value);
+  
+  const tarea = {
+    id: Date.now(),
+    text: message.value
+  }
+  
+  tareas.value.push(tarea);
+  message.value = "";
+}
+
+//eliminar tarea por id
+const eliminarTarea = (id) => {
+  tareas.value = tareas.value.filter(tarea => tarea.id !== id)
+}
 </script>
 
 <template>
-  <h1>Mi primera app Con VUE JS {{ saludar }}</h1>
-  <h2>Contador: {{ contador }}</h2>
-  <button @click="incrementar"> Incrementar +</button>
+  <h1>Mi primera app Con VUE JS , Lista Tareas</h1>
+  <!-- v-model donde tomamos el valor del messagfe -->
+  <input type="text" v-model="message" placeholder="Messanga"/>
+  <button @click="crearTarea">Crear Tarea :D</button>
   <ul>
-    <li v-for="(tarea, index) in tareas" :key="index">{{ index + 1}} - {{ tarea }}</li>
+    <!-- v-for para recorrer el array de tareas y se les pasa el id para eliminar -->
+    <li v-for="tarea in tareas" :key="tarea.id">
+      {{tarea.text}}
+      <button @click="eliminarTarea(tarea.id)">Eliminar</button>
+    </li>
   </ul>
-
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
