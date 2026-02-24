@@ -15,11 +15,14 @@ const totalFrameworks = computed(() => frameworks.value.length);
 </script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <button @click="incrementar">Clicks : {{ contador }}</button>
+  <ul>
+    <li v-for="(tarea, index) in tareas" :key="index">{{ tarea }}</li>
+  </ul>
+  <ul>
+    <li v-for="(framework, index) in frameworks">{{ framework }}</li>
+  </ul>
+  <p>Total Frameworks: {{ totalFrameworks }}</p>
 </template>
 
 <style scoped></style>
