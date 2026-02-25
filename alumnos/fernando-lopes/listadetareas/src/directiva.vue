@@ -1,0 +1,163 @@
+<!-- Editar main.js para cargar Directivas.vue en lugar de App.vue 
+
+import { createApp } from 'vue';
+import App from './Directivas.vue';
+
+createApp(App).mount('#app');
+ -->
+<script setup>
+import { ref } from 'vue';
+const mensaje = ref('¡Hola Vue!');
+const contador = ref(0);
+function incrementar() {
+  contador.value++;
+}
+</script>
+<template>
+  <div>
+    <h1>{{ mensaje }}</h1>
+    <input v-model="mensaje" />
+    <br />
+    <button :disabled="contador < 5">Boton desahabilitado sin contador>5</button>
+    <br />
+    <button @click="contador++">{{ contador }}</button>
+  </div>
+</template>
+<style scoped></style>
+
+<!-- =========================================================
+1️⃣ DATA BINDING EN VUE – TABLA EXPLICATIVA
+=========================================================
+https://vue3-spanish-docs.netlify.app/guide/essentials/forms.html
+
+| Tipo de Binding        | Sintaxis                | Dirección        | ¿Qué hace?                                  | Ejemplo |
+|------------------------|------------------------|------------------|----------------------------------------------|---------|
+| Interpolación          | {{ variable }}         | JS → HTML        | Muestra datos en pantalla                   | <h1>{{ mensaje }}</h1> |
+| Binding de atributo    | :atributo="variable"   | JS → HTML        | Conecta variables a atributos HTML          | <img :src="url"> |
+| Two-Way Binding        | v-model="variable"     | JS ↔ HTML        | Sincroniza input y estado automáticamente   | <input v-model="nombre"> |
+| Event Binding          | @evento="metodo"       | HTML → JS        | Ejecuta funciones al ocurrir eventos        | <button @click="sumar"> |
+
+---------------------------------------------------------
+
+Resumen mental:
+
+Interpolación → Solo muestra datos.
+v-bind (:) → Enlaza atributos dinámicos.
+v-model → Sincronización automática bidireccional.
+@event → Conecta eventos con lógica.
+
+En Vue, el estado controla la vista.
+Si el estado cambia, la interfaz cambia automáticamente.
+ -->
+
+<!-- 
+/*
+====================================================================
+2️⃣ DIRECTIVA DE RENDERIZADO BASADA EN CSS – v-show
+====================================================================
+https://vue3-spanish-docs.netlify.app/api/built-in-directives.html#v-show
+
+
+| Directiva | Tipo | ¿Modifica el DOM? | ¿Usa CSS? | ¿Destruye el nodo? | Caso ideal |
+|------------|------|------------------|-----------|--------------------|------------|
+| v-show     | Visualización | ❌ No | ✅ Sí (display) | ❌ No | Mostrar/ocultar frecuentemente |
+
+--------------------------------------------------------------------
+
+¿Qué hace realmente?
+
+v-show NO elimina el elemento.
+Solo cambia su propiedad CSS:
+
+Si la condición es true:
+  display: original
+
+Si la condición es false:
+  display: none
+
+--------------------------------------------------------------------
+
+Ejemplo conceptual:
+
+<div v-show="visible">Contenido</div>
+
+Equivale aproximadamente a:
+
+<div style="display: none;">Contenido</div>
+
+--------------------------------------------------------------------
+
+|Comparación rápida con v-if
+
+| Característica | v-if | v-show |
+|---------------|-------|---------|
+| Elimina del DOM | ✅ | ❌ |
+| Cambia display CSS | ❌ | ✅ |
+| Bueno para toggles frecuentes | ❌ | ✅ |
+| Bueno para render pesado inicial | ✅ | ❌ |
+
+--------------------------------------------------------------------
+
+Conclusión:
+
+v-show = Controla VISIBILIDAD (CSS)
+v-if   = Controla EXISTENCIA (DOM)
+
+====================================================================
+*/ 
+-->
+
+<!-- 
+ /*
+=====================================================================
+3️⃣ DIRECTIVAS v-if, v-else, v-for – TABLA COMENTADA (VUE)
+=====================================================================
+https://vue3-spanish-docs.netlify.app/api/built-in-directives.html#v-if
+
+| Directiva | Tipo                    | ¿Es Data Binding? | ¿Qué controla?              | ¿Qué hace realmente? |
+|-----------|-------------------------|-------------------|-----------------------------|----------------------|
+| v-if     | Directiva estructural   | ❌ No             | Renderizado condicional     | Crea o destruye el nodo del DOM según una condición |
+| v-else   | Directiva estructural   | ❌ No             | Renderizado alternativo     | Renderiza un bloque cuando v-if es falso/
+Renderiza un bloque cuando v-if es falso |
+| v-for    | Directiva estructural   | ❌ No             | Renderizado de listas       | Repite un elemento según un array o rango |
+
+---------------------------------------------------------------------
+
+Comentarios importantes:
+
+• Estas directivas NO sincronizan datos con la vista.
+• No conectan variables a atributos HTML.
+• Modifican directamente la estructura del DOM.
+• Dependen de datos reactivos, pero no son binding.
+
+Ejemplo mental:
+
+JS decide →
+  ¿Se muestra?
+  ¿Cuántas veces se muestra?
+  ¿Qué bloque se renderiza?
+
+Eso es control estructural del DOM.
+
+---------------------------------------------------------------------
+
+Ejemplos rápidos:
+
+v-if:
+<p v-if="activo">Visible</p>
+
+v-else:
+<p v-else>No visible</p>
+
+v-for:
+<li v-for="item in items" :key="item.id">{{ item }}</li>
+
+---------------------------------------------------------------------
+
+Conclusión corta:
+
+Data Binding → Muestra o sincroniza datos
+Directivas estructurales → Construyen o destruyen el DOM
+
+=====================================================================
+*/ -->
