@@ -1,92 +1,33 @@
+<!-- Editar main.js para cargar Directivas.vue en lugar de App.vue 
+
+import { createApp } from 'vue';
+import App from './Directivas.vue';
+
+createApp(App).mount('#app');
+ -->
+<!-- Ej 1: Directivas básicas (binding y eventos) -->
 <script setup>
-import { ref, computed } from 'vue';
-
-/* =========================
-   1️ Data Binding --> conexión entre los datos (JavaScript) y la vista (HTML).
-========================= */
-const mensaje = ref('Hola Vue 👋');
-
-/* =========================
-   2️ Eventos (contador)
-========================= */
+import { ref } from 'vue';
+const mensaje = ref('¡Hola Vue!');
 const contador = ref(0);
-
 function incrementar() {
   contador.value++;
 }
-
-/* =========================
-   3️ Lista de tareas
-========================= */
-const nuevaTarea = ref('');
-const tareas = ref([]);
-
-function agregarTarea() {
-  if (nuevaTarea.value.trim() === '') return;
-
-  tareas.value.push(nuevaTarea.value);
-  nuevaTarea.value = '';
-}
-
-function eliminarTarea(index) {
-  tareas.value.splice(index, 1);
-}
-
-/* =========================
-   4️ Computed
-========================= */
-const totalTareas = computed(() => tareas.value.length);
-const hayTareas = computed(() => tareas.value.length > 0);
 </script>
 
 <template>
-  <div style="max-width: 600px; margin: auto; font-family: sans-serif">
-    <!-- Data Binding -->
+  <div>
     <h1>{{ mensaje }}</h1>
+    <!-- Binding bidireccional -->
     <input v-model="mensaje" />
-
-    <hr />
-
-    <!-- Eventos -->
-    <button @click="incrementar">Clicks: {{ contador }}</button>
-
-    <hr />
-
-    <!-- Agregar tareas -->
-    <h2>Lista de Tareas</h2>
-
-    <input v-model="nuevaTarea" placeholder="Escribe una nueva tarea" @keyup.enter="agregarTarea" />
-    <!-- Two-way binding (Bidireccional v-model.)  -->
-    <button @click="agregarTarea">Agregar</button>
-
-    <!--  Renderizado condicional -->
-    <p v-if="!hayTareas">No hay tareas pendientes 🚀</p>
-
-    <ul v-else>
-      <li v-for="(tarea, index) in tareas" :key="index">
-        {{ tarea }}
-        <!-- Interpolación (One-way binding) -->
-        <button @click="eliminarTarea(index)">❌</button>
-        <!-- Binding de atributos v-bind o :-->
-      </li>
-    </ul>
-
-    <!--  Computed -->
-    <p>Total tareas: {{ totalTareas }}</p>
+    <br />
+    <!-- v-bind -->
+    <button :disabled="contador > 5">Botón desahabilitado sin contador > 5</button>
+    <br />
+    <!-- v-on -->
+    <button @click="incrementar">{{ contador }}</button>
   </div>
 </template>
-
-<style scoped>
-button {
-  margin-left: 8px;
-  cursor: pointer;
-}
-
-input {
-  margin: 8px 0;
-  padding: 4px;
-}
-</style>
 
 <!-- =========================================================
 1️⃣ DATA BINDING EN VUE – TABLA EXPLICATIVA
