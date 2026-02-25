@@ -27,7 +27,7 @@ const eliminarTarea = (id) => {
 <template>
   <h1>Mi primera app Con VUE JS , Lista Tareas</h1>
   <!-- v-model donde tomamos el valor del messagfe -->
-  <input type="text" v-model="message" placeholder="Messanga"/>
+  <input type="text" v-model="message" placeholder="Message"/>
   <button @click="crearTarea">Crear Tarea :D</button>
   <ul>
     <!-- v-for para recorrer el array de tareas y se les pasa el id para eliminar -->
