@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contador con Vue CDN - Antonio Arriagada</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Contador: {{ contador }}</h1>
+      <button @click="incrementar">➕ Incrementar</button>
+      <button @click="decrementar">➖ Decrementar</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            contador: 0,
+          };
+        },
+        methods: {
+          incrementar() {
+            this.contador++;
+          },
+          decrementar() {
+            this.contador--;
+          },
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
