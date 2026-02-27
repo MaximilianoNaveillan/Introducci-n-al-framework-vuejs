@@ -1,34 +1,37 @@
 <script setup>
-import { ref } from "vue";
-import { useTareasStores } from "./stores/counter";
-import Estadisticas from "./components/Estadisticas.vue";
-
-const store = useTareasStores();
-const nuevaTarea = ref("");
-
-const agregar = () => {
-  store.agregarTarea(nuevaTarea.value);
-  nuevaTarea.value = "";
-};
+import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <p>LISTA DE TAREAS CON PINIA</p>
-  <br />
-  <form @submit.prevent="agregar">
-    <input v-model="nuevaTarea" />
-    <button>Agregar</button>
-  </form>
-  <div>
-    <div v-for="tarea in store.tareas" :key="tarea.id">
-      <h3>{{ tarea.id }} - {{ tarea.texto }} - {{ tarea.completada }}</h3>
-      <button @click="store.completarTarea(tarea.id)">Completar</button>
-      <button @click="store.eliminarTarea(tarea.id)">Eliminar</button>
-    </div>
-  </div>
-  <div>
-    <Estadisticas />
+  <div class="container">
+    <nav class="nav">
+      <router-link to="/" class="lik">Inicio</router-link>
+      <router-link to="/estadisticas" class="lik">Estadisticas</router-link>
+    </nav>
+    <router-view />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.container {
+  background-color: lightcoral;
+  min-height: 100vh;
+}
+
+.nav {
+  background-color: red;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.lik {
+  color: white;
+  text-decoration: none;
+}
+
+.router-link-active {
+  color: black;
+  border-bottom: 1px solid black;
+}
+</style>
