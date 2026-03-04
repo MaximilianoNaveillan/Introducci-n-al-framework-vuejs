@@ -1,11 +1,13 @@
 <script setup>
-import Tareas from './views/Tareas.vue';
-import Estadisticas from './views/Estadisticas.vue';
+import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
-  <Tareas />
-  <Estadisticas />
+  <nav>
+    <router-link to="/">Tareas</router-link>
+    <router-link to="/estadisticas">Estadísticas</router-link>
+  </nav>
+  <router-view />
 </template>
 
 <style scoped></style>
